@@ -47,6 +47,7 @@ bool test_invalid_line() {
 
 
 int main() {
+    int a = 1;
     if (!test_valid_line()) {
         std::cerr << "test_valid_line FAILED\n";
         return 1;

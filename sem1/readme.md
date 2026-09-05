@@ -236,8 +236,6 @@ Propagation механики:
 `PUBLIC` = header-файлы библиотеки являются частью интерфейса `logs_analyzer_core`.
 
 Теперь при компиляции не нужно указывать `-I include`
-<<<<<<< HEAD
-=======
 
 Добавим тестовый target `logs_analyzer_test`
 
@@ -248,4 +246,3 @@ Propagation механики:
 Можно собрать только конкретный target:
 
 `cmake --build build --target logs_analyzer_test`
->>>>>>> bde926e (add test target)

@@ -1,4 +1,4 @@
-#include "stats.hpp"
+#include "../include/stats.hpp"
 
 Statistics calculate_statistics(const std::vector<LogEntry>& entries) {
     Statistics result;

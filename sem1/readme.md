@@ -109,8 +109,6 @@ See error from ld `undefined reference`
 
 При запуске получим underfined reference error:
 `./logs_analyzer`
-<<<<<<< HEAD
-=======
 
 Можно посмотреть таблицу символов объектного файла:
 
@@ -127,4 +125,3 @@ U:
 
 T:
 - `main`
->>>>>>> 122ada5 (command nm)

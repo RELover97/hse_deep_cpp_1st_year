@@ -76,3 +76,36 @@
 Можно посмотреть содержимое бинарного файла и дизассемблированный код (код на языке ассемблера, восстановленный по двоичному коду) объектного файла:
 
 `objdump -d main.o`
+
+`g++ main.o -o main`
+
+`./main`
+
+See error from ld `undefined reference`
+
+6. Linkage
+
+Каждый cpp файл надо скомпилировать в объектный файл и это происходит не зависимо друг от друга
+
+`g++ -c main.cpp -o main.o`
+
+`g++ -c parser.cpp -o parser.o`
+
+`g++ -c stats.cpp -o stats.o`
+
+Собираем из всех объектных файлов исполняемый файл `logs_analyzer`:
+`g++ main.o parser.o stats.o -o logs_analyzer`
+
+Запускаем на исполнение и видим, что программе нужен входной аргумент - имя файла с логами для анализа:
+
+`./logs_analyzer`
+
+`./logs_analyzer access.log`
+
+Попробуем удалить объектный файл `parser.o` и собрать программу из оставшихся:
+
+`rm parser.o`
+`g++ main.o stats.o -o logs_analyzer`
+
+При запуске получим underfined reference error:
+`./logs_analyzer`

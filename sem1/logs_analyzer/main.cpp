@@ -6,7 +6,12 @@
 #include <string>
 #include <vector>
 
+#define VERSION 1
+
 int main(int argc, char* argv[]) {
+
+    std::cout << "version is " << VERSION << std::endl;
+
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <log-file>\n";
         return 1;

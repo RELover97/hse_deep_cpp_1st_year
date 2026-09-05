@@ -228,3 +228,11 @@ Propagation механики:
 - `INTERFACE`
 
 Про это будет отдельный семинар
+
+Добавим include директорию
+
+`target_include_directories`
+
+`PUBLIC` = header-файлы библиотеки являются частью интерфейса `logs_analyzer_core`.
+
+Теперь при компиляции не нужно указывать `-I include`

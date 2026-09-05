@@ -51,3 +51,15 @@
 Получить из исходного файла файл на языке ассемблера:
 `g++ -S main.cpp -o main.s` - синтаксис ассемблера AT&T
 `g++ -S main.cpp -masm=intel -o main.s` - синтаксис ассемблера Intel (проще читать)
+
+4. Compiler optimization
+
+Создадим вне проекта `square.cpp` и скомпилируем его до объектных файлов с разными опциями оптимизации кода:
+её отсутствием (`O0`) и 2м уровнем (`O2`)
+
+`g++ -S -O0 square.cpp -masm=intel -o square_O0.s`
+
+`g++ -S -O2 square.cpp -masm=intel -o square_O2.s`
+
+Посмотрим отличие ассемблерного кода:
+`diff -u square_O0.s square_O2.s`

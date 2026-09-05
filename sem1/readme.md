@@ -109,3 +109,22 @@ See error from ld `undefined reference`
 
 При запуске получим underfined reference error:
 `./logs_analyzer`
+<<<<<<< HEAD
+=======
+
+Можно посмотреть таблицу символов объектного файла:
+
+`nm main.o`
+
+U = undefined: символ используется в объектном файле, но определения нет
+T = символ определён в объектном файле 
+
+В нашем случае для `main.o`: 
+
+U:
+- `parse_line`
+- `calculate_statistics`
+
+T:
+- `main`
+>>>>>>> 122ada5 (command nm)

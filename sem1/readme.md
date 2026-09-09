@@ -256,3 +256,14 @@ Incremental build
 Пересобрана будет только часть проекта, связанная с `test_parser.cpp`
 
 А если наш проект разрастётся и у нас будет десяток таргетов и файлов? Тогда наш CMakeLists.txt станет очень большим и его будет неудобно поддерживать. Можно делегировать логику сборки конкретному каталогу с помощью `add_subdirectory()`.
+<<<<<<< HEAD
+=======
+
+Кстати, вместо `${CMAKE_CURRENT_SOURCE_DIR}/../include` можно использовать `${PROJECT_SOURCE_DIR}/include`.
+
+Мы рассмотрели базовые возможности cmake. Для лучшего освоения:
+
+- пройти туториал по шагам: https://cmake.org/cmake/help/v3.31/guide/tutorial/index.html 
+
+- книга Р. Свидзиньски "CMake для C++. Современный подход": https://www.dmkpress.com/catalog/computer/programming/c/978-5-93700-326-3/ 
+>>>>>>> 726b20b (PROJECT_SOURCE_DIR)

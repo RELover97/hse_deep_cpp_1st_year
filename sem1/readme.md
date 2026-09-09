@@ -246,3 +246,13 @@ Propagation механики:
 Можно собрать только конкретный target:
 
 `cmake --build build --target logs_analyzer_test`
+
+Incremental build
+
+Изменим, например, `test_parser.cpp`
+
+`cmake --build build --verbose`
+
+Пересобрана будет только часть проекта, связанная с `test_parser.cpp`
+
+А если наш проект разрастётся и у нас будет десяток таргетов и файлов? Тогда наш CMakeLists.txt станет очень большим и его будет неудобно поддерживать. Можно делегировать логику сборки конкретному каталогу с помощью `add_subdirectory()`.

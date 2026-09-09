@@ -1,0 +1,3 @@
+add_executable(logs_analyzer_test test_parser.cpp)
+
+target_link_libraries(logs_analyzer_test PRIVATE logs_analyzer_core)

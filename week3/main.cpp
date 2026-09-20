@@ -16,6 +16,8 @@ public:
         }
     }
 
+    ~Wallet() = default;
+
     void deposit(int amount) {
         if (balance + amount <= limit) {
             balance += amount;
@@ -70,7 +72,6 @@ int main()
     std::cout << w.get_id() << std::endl;
     std::cout << w.get_balance() << std::endl;
     std::cout << w.get_limit() << std::endl;
-
 
     const Wallet w2(500);
 

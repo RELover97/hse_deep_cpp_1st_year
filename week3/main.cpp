@@ -16,21 +16,59 @@ public:
         }
     }
 
-    void deposit(int amount);
+    void deposit(int amount) {
+        if (balance + amount <= limit) {
+            balance += amount;
+        } else {
+            std::cout << "Trying to exceed limit of " 
+                     << limit 
+                     << " having balance "
+                     << balance
+                     << std::endl;
+        }
+    }
 
-    void withdraw(int amount);
-    // getters / геттеры
-    int id();
-    int balance();
-    int limit();
+    void withdraw(int amount) {
+        if (balance - amount >= 0) {
+            balance -= amount;
+        } else {
+            std::cout << "Trying to withdraw more money " 
+                      << " than having on balance: "
+                      << balance
+                      << std::endl;
+        }
+    }
+
+        // getters / геттеры
+    int get_id() {
+        return id;
+    }
+
+    int get_balance() {
+        return balance;
+    }
+
+    int get_limit() {
+        return limit;
+    }
 };
 
 int main() 
 {
     // Wallet w1;
 
-    Wallet w(1000);
-    // Wallet w2 = 3000;
+    Wallet w(100);
+ 
+    w.deposit(30);
+    w.deposit(50);
+    w.deposit(50); // warning
+
+    w.withdraw(40);
+    w.withdraw(50); // warning
+
+    std::cout << w.get_id() << std::endl;
+    std::cout << w.get_balance() << std::endl;
+    std::cout << w.get_limit() << std::endl;
 
     return 0;
 }

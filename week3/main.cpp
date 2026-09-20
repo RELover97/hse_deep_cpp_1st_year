@@ -6,10 +6,12 @@ class Wallet {
     int balance;
     int limit;
 
+    inline static int next_id = 1;
+
 public:
 
     explicit Wallet(int l)
-    : id(1), balance(0), limit(l)
+    : id(next_id++), balance(0), limit(l)
     {
         if (l <= 0) {
             throw std::invalid_argument("Limit must be positive");
@@ -59,14 +61,17 @@ public:
     int get_limit() const {
         return limit;
     }
+
+    static int get_next_id() {
+        return next_id;
+    }
 };
 
 
 int main() 
 {
-    // Wallet w1;
-
     Wallet w(100);
+    std::cout << Wallet::get_next_id() << std::endl;
  
     w.deposit(30);
     w.deposit(50);
@@ -80,11 +85,14 @@ int main()
     std::cout << w.get_limit() << std::endl;
 
     const Wallet w2(500);
+    std::cout << Wallet::get_next_id() << std::endl;
 
     // w2.deposit(30);
     w2.get_limit();
 
     Wallet w3(w);
+    std::cout << Wallet::get_next_id() << std::endl;
+
     std::cout << w3.get_id() << std::endl;
     std::cout << w3.get_balance() << std::endl;
     std::cout << w3.get_limit() << std::endl;

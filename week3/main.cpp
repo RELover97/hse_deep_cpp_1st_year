@@ -39,7 +39,7 @@ public:
         }
     }
 
-        // getters / геттеры
+    // getters / геттеры
     int get_id() {
         return id;
     }
@@ -52,6 +52,7 @@ public:
         return limit;
     }
 };
+
 
 int main() 
 {
@@ -69,6 +70,15 @@ int main()
     std::cout << w.get_id() << std::endl;
     std::cout << w.get_balance() << std::endl;
     std::cout << w.get_limit() << std::endl;
+<<<<<<< HEAD
+=======
+
+
+    const Wallet w2(500);
+
+    // w2.deposit(30);
+    w2.get_limit();
+>>>>>>> c6a1e7a (const Wallet)
 
     return 0;
 }

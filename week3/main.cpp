@@ -16,6 +16,8 @@ public:
         }
     }
 
+    ~Wallet() = default;
+
     void deposit(int amount) {
         if (balance + amount <= limit) {
             balance += amount;
@@ -40,15 +42,15 @@ public:
     }
 
     // getters / геттеры
-    int get_id() {
+    int get_id() const {
         return id;
     }
 
-    int get_balance() {
+    int get_balance() const {
         return balance;
     }
 
-    int get_limit() {
+    int get_limit() const {
         return limit;
     }
 };
@@ -70,15 +72,11 @@ int main()
     std::cout << w.get_id() << std::endl;
     std::cout << w.get_balance() << std::endl;
     std::cout << w.get_limit() << std::endl;
-<<<<<<< HEAD
-=======
-
 
     const Wallet w2(500);
 
     // w2.deposit(30);
     w2.get_limit();
->>>>>>> c6a1e7a (const Wallet)
 
     return 0;
 }

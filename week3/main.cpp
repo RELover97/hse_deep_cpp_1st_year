@@ -16,6 +16,12 @@ public:
         }
     }
 
+    Wallet(const Wallet &other) {
+        balance = other.balance;
+        limit = other.limit;
+        id = other.id;
+    }
+
     ~Wallet() = default;
 
     void deposit(int amount) {
@@ -77,6 +83,11 @@ int main()
 
     // w2.deposit(30);
     w2.get_limit();
+
+    Wallet w3(w);
+    std::cout << w3.get_id() << std::endl;
+    std::cout << w3.get_balance() << std::endl;
+    std::cout << w3.get_limit() << std::endl;
 
     return 0;
 }

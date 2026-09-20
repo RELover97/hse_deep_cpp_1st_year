@@ -8,6 +8,20 @@ inline int square(int x)
     return x * x;
 }
 
+int fun1(int a)
+{
+    return a;
+}
+
+int fun1(int a, int b)
+{
+    return a + b;
+}
+
+int global_var = 1;
+
+static int static_global_var = 1;
+
 
 class Wallet {
     int id;
@@ -45,17 +59,7 @@ public:
 
     ~Wallet() = default;
 
-    void deposit(int amount) {
-        if (balance + amount <= limit) {
-            balance += amount;
-        } else {
-            std::cout << "Trying to exceed limit of " 
-                     << limit 
-                     << " having balance "
-                     << balance
-                     << std::endl;
-        }
-    }
+    void deposit(int amount);
 
     void withdraw(int amount) {
         if (balance - amount >= 0) {
@@ -87,7 +91,17 @@ public:
 };
 
 // int Wallet::next_id = 1; // definition (until C++17)
-
+void Wallet::deposit(int amount) {
+    if (balance + amount <= limit) {
+        balance += amount;
+    } else {
+        std::cout << "Trying to exceed limit of " 
+                    << limit 
+                    << " having balance "
+                    << balance
+                    << std::endl;
+    }
+}
 
 int main() 
 {

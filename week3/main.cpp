@@ -30,6 +30,8 @@ class Wallet {
 
     inline static int next_id = 1; // declaration + definition (since C++17)
 
+    mutable int inspection_count = 0;
+
 public:
 
     /*
@@ -59,7 +61,25 @@ public:
 
     ~Wallet() = default;
 
-    void deposit(int amount);
+    void inspect() const {
+        ++inspection_count;
+
+        std::cout << "Wallet #" << id
+                  << ": balance = " << balance
+                  << '\n';
+    }
+
+    void deposit(int amount) {
+        if (balance + amount <= limit) {
+            balance += amount;
+        } else {
+            std::cout << "Trying to exceed limit of " 
+                     << limit 
+                     << " having balance "
+                     << balance
+                     << std::endl;
+        }
+    }
 
     void withdraw(int amount) {
         if (balance - amount >= 0) {
@@ -74,6 +94,7 @@ public:
 
     // getters / геттеры
     int get_id() const {
+        next_id++;
         return id;
     }
 
@@ -126,7 +147,7 @@ int main()
 
     const Wallet w2(500);
     std::cout << "next id is " << Wallet::get_next_id() << std::endl;
-
+    w2.inspect();
     // w2.deposit(30);
     w2.get_limit();
 

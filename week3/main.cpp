@@ -8,6 +8,8 @@ class Wallet {
 
     inline static int next_id = 1;
 
+    mutable int inspection_count = 0;
+
 public:
 
     explicit Wallet(int l)
@@ -25,6 +27,14 @@ public:
     }
 
     ~Wallet() = default;
+
+    void inspect() const {
+        ++inspection_count;
+
+        std::cout << "Wallet #" << id
+                  << ": balance = " << balance
+                  << '\n';
+    }
 
     void deposit(int amount) {
         if (balance + amount <= limit) {

@@ -6,17 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# include(FetchContent)
-
-# FetchContent_Declare(
-#     fmt
-#     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-#     GIT_TAG 12.2.0
-# )
-
-# FetchContent_MakeAvailable(fmt)
-
-find_package(fmt CONFIG REQUIRED)
+add_subdirectory(
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/fmt
+)
 
 add_library(wallet
     src/wallet.cpp

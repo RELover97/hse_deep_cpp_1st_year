@@ -25,7 +25,7 @@ target_include_directories(wallet
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(wallet PRIVATE fmt::fmt)
+target_link_libraries(wallet PUBLIC fmt::fmt)
 
 add_executable(wallet_demo
     src/main.cpp

@@ -3,6 +3,8 @@
 
 #include "wallet.hpp"
 
+#include "wallet_format.hpp"
+
 #include <fmt/format.h>
 
 #define SQUARE(x) ((x) * (x))
@@ -29,8 +31,6 @@ static int static_global_var = 1;
 
 int main() 
 {
-    fmt::print("Hello from main\n");
-
     int a = square(5);
 
     int b = SQUARE(6);
@@ -49,6 +49,8 @@ int main()
     std::cout << w.get_id() << std::endl;
     std::cout << w.get_balance() << std::endl;
     std::cout << w.get_limit() << std::endl;
+
+    fmt::print("{}\n", w);
 
     const Wallet w2(500);
     std::cout << "next id is " << Wallet::get_next_id() << std::endl;

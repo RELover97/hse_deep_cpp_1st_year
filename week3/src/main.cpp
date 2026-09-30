@@ -32,7 +32,7 @@ int main()
     int b = SQUARE(6);
     // int c = ((a + 1) * (a + 1)); // 2 * a + 1
 
-    Wallet w(100);
+    Wallet w(1000);
     std::cout << "next id is " << Wallet::get_next_id() << std::endl;
  
     w.deposit(30);

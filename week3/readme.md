@@ -335,3 +335,27 @@ fatal error: fmt/format.hpp: No such file or directory
 ```
 target_link_libraries(wallet_demo PRIVATE wallet fmt::fmt)
 ```
+
+Напишем `wallet_format.hpp`, в котором уже выразим зависимость от `fmt` публичным способом. А `CMakeLists.txt` изменим:
+```
+target_link_libraries(wallet PUBLIC fmt::fmt)
+```
+
+
+Теперь пользователь нашей библиотеки сможет в своём коде писать:
+```cpp
+#include "wallet_format.h"
+#include <fmt/format.h>
+...
+int main()
+{
+    ...
+    Wallet wallet(1000);
+    wallet.deposit(300);
+
+    fmt::print("{}\n", wallet);
+    ...
+}
+```
+
+Public зависимость означает, что если `wallet` использует `fmt`, то пользователи `wallet` (это `wallet_demo`) тоже получают зависимость `fmt`.

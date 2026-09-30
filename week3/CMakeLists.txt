@@ -31,7 +31,4 @@ add_executable(wallet_demo
     src/main.cpp
 )
 
-target_link_libraries(wallet_demo
-    PRIVATE
-        wallet
-)
+target_link_libraries(wallet_demo PRIVATE wallet)

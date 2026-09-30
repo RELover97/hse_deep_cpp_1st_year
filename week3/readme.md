@@ -304,3 +304,34 @@ target_link_libraries(wallet PRIVATE fmt::fmt)
 - появляется таргет `fmt::fmt`
 
 - связываем `fmt` с `wallet`
+
+Теперь у нас зависимости выглядят так: `wallet_demo` -> `wallet` -> `fmt::fmt`, то есть `wallet_demo` транзитивно зависит от `fmt::fmt`. А нужно ли нам в этом случае писать:
+```
+target_link_libraries(wallet PRIVATE fmt::fmt)
+```
+
+Нет: если в `main.cpp` не используется функциональность из `fmt`, то приложение просто зависит от `wallet`, при этом ему не важно, а от чего` в свою очередь` зависит `wallet`. Для указания такой связи между таргетами есть ключевое слово `PRIVATE`, которая говорит о том, что зависимость от `fmt` нужна только `wallet` и не нужна `wallet_demo`.
+
+Попробуем в этом случае в `main.cpp` добавить:
+```
+#include <fmt/format.h>
+...
+int main()
+{
+    ...
+    fmt::print("Hello from main\n");
+    ...
+}
+```
+
+и получим знакомую ошибку
+```
+fatal error: fmt/format.hpp: No such file or directory
+```
+
+потому что `wallet_demo` не наследует интерфейс `fmt`.
+
+Чтобы в `main.cpp` можно было использовать `fmt`, надо явно прописать:
+```
+target_link_libraries(wallet_demo PRIVATE wallet fmt::fmt)
+```

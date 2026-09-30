@@ -384,3 +384,17 @@ target_link_libraries(wallet PRIVATE fmt::fmt-header-only)
 ### `find_package`
 
 Мы можем скачать себе локально `fmt` и использовать функцию `find_package`,  которая ищет внешний пакет и загружает его конфигурацию. После чего мы линкуем полученные таргеты с нашими таргетами. Детали: https://fmt.dev/12.0/get-started/#:~:text=fmt)-,Installed:%20You%20can%20find,target%3E%20fmt::fmt),-Installation
+
+### `git submodule`
+```
+git submodule add https://github.com/fmtlib/fmt.git external/fmt
+```
+
+Теперь в директории `external/fmt` у нас лежит репозиторий с кодом `fmt`.
+
+В `CMakeLists.txt`:
+```
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/fmt)
+```
+
+То есть, git позволяет ответить на вопрос "Где взять файлы реализации библиотеки?", CMake - "как эти файлы реализации становятся таргетами?", `target_link_libraries` - "Какие зависимости нужны таргету и даолжны ли они быть доступны потребителю?"

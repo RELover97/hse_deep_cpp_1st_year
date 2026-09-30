@@ -1,5 +1,7 @@
 #include "wallet.hpp"
 
+#include <fmt/format.h>
+
 #include <iostream>
 #include <stdexcept>
 
@@ -118,9 +120,7 @@ void Wallet::print_history() const {
 void Wallet::inspect() const {
     ++inspection_count;
 
-    std::cout << "Wallet #" << id
-                << ": balance = " << balance
-                << '\n';
+    fmt::print("Wallet #{}: balance = {}\n", id, balance);
 }
 
 
@@ -186,7 +186,6 @@ Wallet& Wallet::operator=(const Wallet& other)
 
     return *this;
 }
-
 
 int Wallet::get_next_id() {
     return next_id;

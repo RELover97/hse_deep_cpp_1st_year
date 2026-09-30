@@ -3,6 +3,8 @@
 
 #include "wallet.hpp"
 
+#include <fmt/format.h>
+
 #define SQUARE(x) ((x) * (x))
 
 inline int square(int x)
@@ -27,6 +29,8 @@ static int static_global_var = 1;
 
 int main() 
 {
+    fmt::print("Hello from main\n");
+
     int a = square(5);
 
     int b = SQUARE(6);

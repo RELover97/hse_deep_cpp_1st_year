@@ -270,3 +270,37 @@ fatal error: fmt/format.h: No such file or directory
 ```
 потому что у нас в проекте появились **сторонние зависимости** (**3rd-party dependencies / libraries**): `fmt` - внешняя по отношению к нашему проекту библиотека, которую мы используем у себя, а её исходный код находится за пределами нашего проекта. Поэтому надо сказать нашей программе, где найти эту библиотеку и как её использовать.
 
+### FetchContent
+
+В `CMakeLists.txt` добавим строки
+```
+include(FetchContent)
+
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+    GIT_TAG 12.2.0
+)
+
+FetchContent_MakeAvailable(fmt)
+```
+
+и потом 
+
+```
+target_link_libraries(wallet PRIVATE fmt::fmt)
+```
+
+Что здесь происходит: `FetchContent` делает зависимость `fmt` доступной на этапе конфигурации проекта, поэтому этот таргет можно использовать дальше в своём проекте, то есть под капотом:
+
+- конфигурируем cmake проект (первый этап работы cmake)
+
+- `FetchContent`
+
+- скачиваем `fmt`
+
+- добавляем `fmt` в `build`
+
+- появляется таргет `fmt::fmt`
+
+- связываем `fmt` с `wallet`

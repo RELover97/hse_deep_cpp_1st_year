@@ -25,10 +25,25 @@ target_include_directories(wallet
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(wallet PUBLIC fmt::fmt)
+# Now fmt::fmt is linked privately as we have header-only lib wallet_format for wallet_demo
+target_link_libraries(wallet PRIVATE fmt::fmt)
+
+
+# header-only lib
+
+add_library(wallet_format INTERFACE)
+
+target_include_directories(wallet_format INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(wallet_format INTERFACE fmt::fmt)
+
+
 
 add_executable(wallet_demo
     src/main.cpp
 )
 
 target_link_libraries(wallet_demo PRIVATE wallet)
+
+# usage of header-only lib
+target_link_libraries(wallet_demo PRIVATE wallet_format)

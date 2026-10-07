@@ -20,6 +20,10 @@ public:
         std::cout << "I am an operation" << std::endl;
     }
 
+    ~Operation() {
+        std::cout << "Destructing Operation" << std::endl;
+    }
+
 protected:
 
     double amount;
@@ -37,6 +41,10 @@ public:
     void print() const override {
         std::cout << "Income: " << description << ", " << amount << '\n';
     }
+
+    ~Income() {
+        std::cout << "Destructing Income" << std::endl;
+    }
 };
 
 
@@ -48,6 +56,10 @@ public:
     void print() const override {
         std::cout << "Expense: " << description << ", " << amount << '\n';
     }
+
+    ~Expense() {
+        std::cout << "Destructing Expense" << std::endl;
+    }
 };
 
 class Transfer : public Operation {
@@ -58,6 +70,10 @@ public:
 
     void print() const override {
         std::cout << "Transfer: " << description << ", " << amount << '\n';
+    }
+
+    ~Transfer() {
+        std::cout << "Destructing Transfer" << std::endl;
     }
 };
 
@@ -72,6 +88,10 @@ int main()
 
     for (size_t i = 0; i < operations.size(); ++i) {
         operations[i]->print();
+    }
+
+    for (auto &operation: operations) {
+        delete operation;
     }
 
     return 0;

@@ -172,6 +172,33 @@ public:
 };
 
 
+class ReportImporter {
+public:
+    explicit ReportImporter(const IOperationReader& r)
+        : reader(&r) {}
+
+    void set_reader(const IOperationReader& r) {
+        reader = &r;
+    }
+
+    FinancialReport import(const std::string &source) const {
+        FinancialReport report;
+
+        auto operations = reader->read(source);
+
+        for (auto& operation : operations) {
+            report.add(operation);
+        }
+
+        return report;
+    }
+
+private:
+
+    const IOperationReader* reader;
+};
+
+
 int main()
 {
     std::vector<Operation*> operations {

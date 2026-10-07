@@ -16,7 +16,7 @@ public:
         return description;
     }
 
-    void print() const {
+    virtual void print() const {
         std::cout << "I am an operation" << std::endl;
     }
 

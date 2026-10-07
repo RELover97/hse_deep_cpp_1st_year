@@ -34,7 +34,7 @@ public:
         : Operation(amount, description) 
     {}
 
-    void print() const {
+    void print() const override {
         std::cout << "Income: " << description << ", " << amount << '\n';
     }
 };
@@ -45,7 +45,7 @@ public:
     Expense(double amount, std::string description)
         : Operation(amount, description) {}
 
-    void print() const {
+    void print() const override {
         std::cout << "Expense: " << description << ", " << amount << '\n';
     }
 };
@@ -56,7 +56,7 @@ public:
         : Operation(amount, description) 
     {}
 
-    void print() {
+    void print() const override {
         std::cout << "Transfer: " << description << ", " << amount << '\n';
     }
 };

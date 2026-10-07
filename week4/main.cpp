@@ -201,19 +201,30 @@ private:
 
 int main()
 {
-    std::vector<Operation*> operations {
-        new Income(150000, "Salary"),
-        new Expense(50000, "Rent"),
-        new Transfer(10000, "Debt")
-    };
+    SqlReader sql_reader;
+    ExcelReader excel_reader;
+    DocumentReader document_reader;
 
-    for (size_t i = 0; i < operations.size(); ++i) {
-        operations[i]->print();
-    }
+    ReportImporter importer(sql_reader);
 
-    for (const auto &op: operations) {
-        delete op;
-    }
+    auto sql_report =
+        importer.import("finance.db");
+
+    sql_report.print();
+
+    importer.set_reader(excel_reader);
+
+    auto excel_report =
+        importer.import("finance.xlsx");
+
+    excel_report.print();
+
+    importer.set_reader(document_reader);
+
+    auto document_report =
+        importer.import("report.txt");
+
+    document_report.print();
 
     return 0;
 }

@@ -76,7 +76,32 @@ public:
 };
 
 class FinancialReport {
+public:
+    void add(Operation *operation) {
+        operations.push_back(std::move(operation));
+    }
+
+    double total() const {
+        double result = 0.0;
+
+        for (const auto& operation : operations) {
+            result += operation->get_amount();
+        }
+
+        return result;
+    }
+
+    void print() const {
+        for (const auto& operation : operations) {
+            operation->print();
+        }
+
+        std::cout << "----------------\n";
+        std::cout << "Total: " << total() << '\n';
+    }
+
 private:
+
     std::vector<Operation*> operations;
 };
 

@@ -64,14 +64,14 @@ public:
 
 int main()
 {
-    std::vector<Operation> operations {
-        Income(150000, "Salary"),
-        Expense(50000, "Rent"),
-        Transfer(10000, "Debt")
+    std::vector<Operation*> operations {
+        new Income(150000, "Salary"),
+        new Expense(50000, "Rent"),
+        new Transfer(10000, "Debt")
     };
 
     for (size_t i = 0; i < operations.size(); ++i) {
-        operations[i].print();
+        operations[i]->print();
     }
 
     return 0;

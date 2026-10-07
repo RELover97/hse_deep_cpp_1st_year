@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <vector>
 
 class Operation {
 public:
@@ -15,7 +16,9 @@ public:
         return description;
     }
 
-    void print() const;
+    void print() const {
+        std::cout << "I am an operation" << std::endl;
+    }
 
 protected:
 
@@ -61,13 +64,15 @@ public:
 
 int main()
 {
-    Income salary(150000, "Salary");
-    Expense rent(50000, "Rent");
-    Transfer to_friend(10000, "Debt");
+    std::vector<Operation> operations {
+        Income(150000, "Salary"),
+        Expense(50000, "Rent"),
+        Transfer(10000, "Debt")
+    };
 
-    salary.print();
-    rent.print();
-    to_friend.print();
+    for (size_t i = 0; i < operations.size(); ++i) {
+        operations[i].print();
+    }
 
     return 0;
 }

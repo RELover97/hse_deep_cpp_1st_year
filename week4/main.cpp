@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <memory>
 
 class Operation {
 public:
@@ -16,9 +17,7 @@ public:
         return description;
     }
 
-    virtual void print() const {
-        std::cout << "I am an operation" << std::endl;
-    }
+    virtual void print() const = 0;
 
     virtual ~Operation() {
         std::cout << "Destructing Operation" << std::endl;
@@ -80,18 +79,14 @@ public:
 
 int main()
 {
-    std::vector<Operation*> operations {
-        new Income(150000, "Salary"),
-        new Expense(50000, "Rent"),
-        new Transfer(10000, "Debt")
-    };
+    std::vector<std::unique_ptr<Operation>> operations;
+
+    operations.emplace_back(std::make_unique<Income>(150000, "Salary"));
+    operations.emplace_back(std::make_unique<Expense>(50000, "Rent"));
+    operations.emplace_back(std::make_unique<Transfer>(10000, "Debt"));
 
     for (size_t i = 0; i < operations.size(); ++i) {
         operations[i]->print();
-    }
-
-    for (auto &operation: operations) {
-        delete operation;
     }
 
     return 0;

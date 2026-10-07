@@ -81,21 +81,37 @@ private:
 };
 
 
-class ReportImporter {
+class IOperationReader {
 public:
-    FinancialReport import(std::string type, std::string source)
-    {
-        FinancialReport report;
+    virtual ~IOperationReader() = default;
 
-        if (type == "sql") {
-            // SQL
-        } else if (type == "excel") {
-            // Excel
-        } else if (type == "document") {
-            // Document
-        }
+    virtual std::vector<Operation*> read(const std::string &source) const = 0;
+};
 
-        return report;
+class SqlReader : public IOperationReader {
+public:
+    std::vector<Operation*> read(const std::string &source) const override {
+        std::vector<Operation*> operations;
+        // SQL implementation ...
+        return operations;
+    }
+};
+
+class ExcelReader : public IOperationReader {
+public:
+    std::vector<Operation*> read(const std::string &source) const override {
+        std::vector<Operation*> operations;
+        // Excel implementation
+        return operations;
+    }
+};
+
+class DocumentReader : public IOperationReader {
+public:
+    std::vector<Operation*> read(const std::string &source) const override {
+        std::vector<Operation*> operations;
+        // Document implementation
+        return operations;
     }
 };
 

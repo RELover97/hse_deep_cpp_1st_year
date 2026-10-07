@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <memory>
 
 class Operation {
 public:
@@ -76,17 +75,45 @@ public:
     }
 };
 
+class FinancialReport {
+private:
+    std::vector<Operation*> operations;
+};
+
+
+class ReportImporter {
+public:
+    FinancialReport import(std::string type, std::string source)
+    {
+        FinancialReport report;
+
+        if (type == "sql") {
+            // SQL
+        } else if (type == "excel") {
+            // Excel
+        } else if (type == "document") {
+            // Document
+        }
+
+        return report;
+    }
+};
+
 
 int main()
 {
-    std::vector<std::unique_ptr<Operation>> operations;
-
-    operations.emplace_back(std::make_unique<Income>(150000, "Salary"));
-    operations.emplace_back(std::make_unique<Expense>(50000, "Rent"));
-    operations.emplace_back(std::make_unique<Transfer>(10000, "Debt"));
+    std::vector<Operation*> operations {
+        new Income(150000, "Salary"),
+        new Expense(50000, "Rent"),
+        new Transfer(10000, "Debt")
+    };
 
     for (size_t i = 0; i < operations.size(); ++i) {
         operations[i]->print();
+    }
+
+    for (const auto &op: operations) {
+        delete op;
     }
 
     return 0;

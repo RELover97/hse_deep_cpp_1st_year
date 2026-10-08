@@ -20,7 +20,7 @@ public:
         std::cout << "I am an operation" << std::endl;
     }
 
-    ~Operation() {
+    virtual ~Operation() {
         std::cout << "Destructing Operation" << std::endl;
     }
 

@@ -54,3 +54,21 @@ void Transfer::print()’ marked ‘override’, but does not override
 g++ -fsanitize=address main.cpp
 ./a.out
 ```
+
+Вызов вирутальных функций происходит через таблицу виртуальных методов. Посмотреть на неё можно с помощью отладчика `gdb`:
+```
+g++ -g main.cpp
+gdb -q ./a.out
+(gdb) b 89 
+(gdb) r
+(gdb) n
+(gdb) info locals
+(gdb) info vtbl operations[0]
+(gdb) n
+(gdb) n
+(gdb) info vtbl operations[1]
+(gdb) q
+
+g++ -fdump-lang-class -c main.cpp
+grep -A5 "Vtable for Operation" main.cpp.001l.class
+```

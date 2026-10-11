@@ -241,6 +241,17 @@ void inspect_reader(const IOperationReader& reader)
               << '\n';
 }
 
+void inspect_concrete_type(const IOperationReader& reader) 
+{
+    if (const auto* sql =
+            dynamic_cast<const SqlReader*>(&reader)) {
+        std::cout << "This is an SqlReader\n";
+        return;
+    }
+
+    std::cout << "This is not an SqlReader\n";
+}
+
 
 int main()
 {
@@ -274,6 +285,9 @@ int main()
     inspect_reader(sql_reader);
     inspect_reader(excel_reader);
     inspect_reader(document_reader);
+
+    inspect_concrete_type(sql_reader);
+    inspect_concrete_type(excel_reader);
 
     return 0;
 }

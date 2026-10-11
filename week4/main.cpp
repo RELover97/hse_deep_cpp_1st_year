@@ -113,26 +113,6 @@ public:
     virtual std::vector<Operation*> read(const std::string &source) const = 0;
 };
 
-class SqlReader : public IOperationReader {
-public:
-    std::vector<Operation*> read(const std::string &source) const override {
-        std::cout << "[SQL] Reading from database: "
-                  << source << '\n';
-
-        std::cout << "[SQL] Executing query:\n"
-                  << "SELECT type, amount, description "
-                  << "FROM operations;\n";
-
-        std::vector<Operation*> result;
-
-        result.push_back(new Income(150000, "Salary"));
-
-        result.push_back(new Expense(50000, "Rent"));
-
-        return result;  
-    }
-};
-
 class ExcelReader : public IOperationReader {
 public:
     std::vector<Operation*> read(const std::string &source) const override {
@@ -196,6 +176,43 @@ public:
 private:
 
     const IOperationReader* reader;
+};
+
+class IReaderDiagnostics {
+public:
+    virtual ~IReaderDiagnostics() = default;
+
+    virtual void print_diagnostics() const = 0;
+};
+
+
+class SqlReader: public IOperationReader, public IReaderDiagnostics {
+public:
+    std::vector<Operation*>
+    read(const std::string& source) const override {
+        std::cout << "[SQL] Reading from: "
+                  << source << '\n';
+
+        std::cout << "[SQL] Executing query\n";
+
+        std::vector<Operation*> result;
+
+        result.push_back(
+            new Income(150000, "Salary")
+        );
+
+        result.push_back(
+            new Expense(50000, "Rent")
+        );
+
+        return result;
+    }
+
+    void print_diagnostics() const override {
+        std::cout << "[SQL diagnostics]\n"
+                  << "Connection: primary-finance-db\n"
+                  << "Status: OK\n";
+    }
 };
 
 

@@ -252,6 +252,16 @@ void inspect_concrete_type(const IOperationReader& reader)
     std::cout << "This is not an SqlReader\n";
 }
 
+void inspect_diagnostics_support(const IOperationReader& reader)
+{
+    if (const auto* diagnostics =
+            dynamic_cast<const IReaderDiagnostics*>(&reader)) {
+        diagnostics->print_diagnostics();
+    } else {
+        std::cout << "Diagnostics are not supported\n";
+    }
+}
+
 
 int main()
 {
@@ -288,6 +298,9 @@ int main()
 
     inspect_concrete_type(sql_reader);
     inspect_concrete_type(excel_reader);
+
+    inspect_diagnostics_support(sql_reader);
+    inspect_diagnostics_support(excel_reader);
 
     return 0;
 }

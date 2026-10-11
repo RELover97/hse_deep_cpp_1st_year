@@ -216,6 +216,22 @@ public:
 };
 
 
+void show_base_addresses(const SqlReader& sql) 
+{
+    const IOperationReader* reader_base = &sql;
+    const IReaderDiagnostics* diagnostics_base = &sql;
+
+    std::cout << "SqlReader object: "
+              << static_cast<const void*>(&sql) << '\n';
+
+    std::cout << "IOperationReader: "
+              << static_cast<const void*>(reader_base) << '\n';
+
+    std::cout << "IReaderDiagnostics: "
+              << static_cast<const void*>(diagnostics_base) << '\n';
+}
+
+
 int main()
 {
     SqlReader sql_reader;
@@ -242,6 +258,8 @@ int main()
         importer.import("report.txt");
 
     document_report.print();
+
+    show_base_addresses(sql_reader);
 
     return 0;
 }

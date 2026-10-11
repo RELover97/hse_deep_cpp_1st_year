@@ -236,29 +236,18 @@ void show_base_addresses(const SqlReader& sql)
 
 void inspect_reader(const IOperationReader& reader) 
 {
+    std::cout << "\n--- Inspect reader ---\n";
+
     std::cout << "Dynamic type: "
               << typeid(reader).name()
               << '\n';
-}
 
-void inspect_concrete_type(const IOperationReader& reader) 
-{
-    if (const auto* sql =
-            dynamic_cast<const SqlReader*>(&reader)) {
-        std::cout << "This is an SqlReader\n";
-        return;
-    }
-
-    std::cout << "This is not an SqlReader\n";
-}
-
-void inspect_diagnostics_support(const IOperationReader& reader)
-{
     if (const auto* diagnostics =
             dynamic_cast<const IReaderDiagnostics*>(&reader)) {
+        std::cout << "Diagnostics: supported\n";
         diagnostics->print_diagnostics();
     } else {
-        std::cout << "Diagnostics are not supported\n";
+        std::cout << "Diagnostics: not supported\n";
     }
 }
 
@@ -295,12 +284,6 @@ int main()
     inspect_reader(sql_reader);
     inspect_reader(excel_reader);
     inspect_reader(document_reader);
-
-    inspect_concrete_type(sql_reader);
-    inspect_concrete_type(excel_reader);
-
-    inspect_diagnostics_support(sql_reader);
-    inspect_diagnostics_support(excel_reader);
 
     return 0;
 }

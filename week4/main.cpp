@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+#include <typeinfo>
+
 class Operation {
 public:
     Operation(double a, std::string d)
@@ -232,6 +234,14 @@ void show_base_addresses(const SqlReader& sql)
 }
 
 
+void inspect_reader(const IOperationReader& reader) 
+{
+    std::cout << "Dynamic type: "
+              << typeid(reader).name()
+              << '\n';
+}
+
+
 int main()
 {
     SqlReader sql_reader;
@@ -260,6 +270,10 @@ int main()
     document_report.print();
 
     show_base_addresses(sql_reader);
+
+    inspect_reader(sql_reader);
+    inspect_reader(excel_reader);
+    inspect_reader(document_reader);
 
     return 0;
 }

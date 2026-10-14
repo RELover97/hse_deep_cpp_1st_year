@@ -16,9 +16,7 @@ public:
         return description;
     }
 
-    virtual void print() const {
-        std::cout << "I am an operation" << std::endl;
-    }
+    virtual void print() const = 0;
 
     ~Operation() {
         std::cout << "Destructing Operation" << std::endl;
@@ -84,12 +82,12 @@ int main()
         new Income(150000, "Salary"),
         new Expense(50000, "Rent"),
         new Transfer(10000, "Debt")
-    };
+   };
 
     for (size_t i = 0; i < operations.size(); ++i) {
         operations[i]->print();
     }
-
+    
     for (auto &operation: operations) {
         delete operation;
     }

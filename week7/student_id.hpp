@@ -22,3 +22,11 @@ struct StudentId {
         return out << id.group << '-' << id.number;
     }
 };
+
+// Функтор задаёт иной порядок для map, не меняя operator< StudentId.
+struct ByNumber {
+    bool operator()(const StudentId& a, const StudentId& b) const {
+        // Учитываем оба поля: ключи с одним номером, но разными группами не равны.
+        return std::tie(a.number, a.group) < std::tie(b.number, b.group);
+    }
+};

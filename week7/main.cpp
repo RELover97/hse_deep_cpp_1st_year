@@ -87,4 +87,14 @@ int main() {
         std::cout << entry.first << ": " << entry.second << '\n';
     }
     std::cout << "A-2 total: " << results.at(StudentId{"A", 2}).total() << '\n';
+
+    // Третий параметр шаблона задаёт функтор другого порядка.
+    std::map<StudentId, Scores, ByNumber> by_number;
+    for (const auto& entry : results) {
+        by_number.emplace(entry.first, entry.second);
+    }
+    std::cout << "Ordered by number, then group:\n";
+    for (const auto& entry : by_number) {
+        std::cout << entry.first << '\n';
+    }
 }

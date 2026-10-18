@@ -1,7 +1,9 @@
 #include "scores.hpp"
 #include "student_id.hpp"
+#include <algorithm>
 #include <iostream>
 #include <map>
+#include <vector>
 
 
 namespace {
@@ -97,4 +99,10 @@ int main() {
     for (const auto& entry : by_number) {
         std::cout << entry.first << '\n';
     }
+
+    // count_if вызывает функтор-предикат с заданным порогом.
+    std::vector<Scores> attempts{{4, 5, 6}, {1, 2, 3}, {9, 8, 1}};
+    const auto enough = std::count_if(attempts.begin(), attempts.end(),
+                                      AtLeastTotal{15});
+    std::cout << "Totals >= 15: " << enough << '\n';
 }

@@ -65,3 +65,8 @@ std::ostream& operator<<(std::ostream& out, const Scores& scores) {
                << ", " << scores.values_[2] << ']';
 }
 
+bool AtLeastTotal::operator()(const Scores& scores) const {
+    // const: проверка не изменяет ни порог, ни результаты.
+    return scores.total() >= minimum;
+}
+

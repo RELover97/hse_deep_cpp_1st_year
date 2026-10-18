@@ -37,3 +37,10 @@ Scores operator+(Scores lhs, const Scores& rhs);
 // Две свободные перегрузки поддерживают оба порядка операндов.
 Scores operator*(Scores lhs, int factor);
 Scores operator*(int factor, Scores rhs);
+
+// Функтор хранит порог и вызывается через operator().
+struct AtLeastTotal {
+    int minimum;
+    bool operator()(const Scores& scores) const;
+};
+

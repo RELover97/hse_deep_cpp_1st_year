@@ -1,4 +1,5 @@
 #include "scores.hpp"
+#include "student_id.hpp"
 #include <iostream>
 
 
@@ -65,4 +66,12 @@ int main() {
 
     // operator<< возвращает ostream&, поэтому допускает цепочки <<.
     std::cout << "Scores: " << first << " and " << second << '\n';
+
+    // Составной ключ: сочетание группы и номера.
+    StudentId anna{"A", 2};
+    StudentId boris{"B", 1};
+    std::cout << std::boolalpha;
+    std::cout << "anna == boris: " << (anna == boris) << '\n';
+    std::cout << "anna < boris: " << (anna < boris) << '\n';
+    std::cout << anna << ' ' << boris << '\n';
 }

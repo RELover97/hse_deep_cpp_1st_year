@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <map>
+#include <unordered_map>
 #include <vector>
 
 
@@ -105,4 +106,11 @@ int main() {
     const auto enough = std::count_if(attempts.begin(), attempts.end(),
                                       AtLeastTotal{15});
     std::cout << "Totals >= 15: " << enough << '\n';
+
+    // unordered_map использует StudentHash и operator==; порядок обхода не задан.
+    std::unordered_map<StudentId, Scores, StudentHash> fast_results;
+    fast_results.emplace(StudentId{"A", 2}, Scores{5, 5, 5});
+    fast_results.emplace(StudentId{"B", 1}, Scores{2, 3, 4});
+    std::cout << "Hash lookup A-2: "
+              << fast_results.at(StudentId{"A", 2}).total() << '\n';
 }

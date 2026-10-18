@@ -1,6 +1,7 @@
 #include "scores.hpp"
 #include "student_id.hpp"
 #include <iostream>
+#include <map>
 
 
 namespace {
@@ -74,4 +75,16 @@ int main() {
     std::cout << "anna == boris: " << (anna == boris) << '\n';
     std::cout << "anna < boris: " << (anna < boris) << '\n';
     std::cout << anna << ' ' << boris << '\n';
+
+    // std::map сортирует ключи по operator<
+    std::map<StudentId, Scores> results;
+    results.emplace(StudentId{"B", 1}, Scores{2, 3, 4});
+    results.emplace(StudentId{"A", 2}, Scores{5, 5, 5});
+    results.emplace(StudentId{"A", 1}, Scores{1, 3, 5});
+
+    std::cout << "Ordered by group, then number:\n";
+    for (const auto& entry : results) {
+        std::cout << entry.first << ": " << entry.second << '\n';
+    }
+    std::cout << "A-2 total: " << results.at(StudentId{"A", 2}).total() << '\n';
 }

@@ -44,4 +44,17 @@ int main() {
     // Явный static_cast снимает неоднозначность.
     choose(static_cast<long>(42));
     choose(static_cast<double>(42));
+
+    // operator[] возвращает int&, поэтому элементу можно присвоить значение.
+    first[1] = 8;
+    const Scores fixed{1, 2, 3};
+    std::cout << "Changed element: " << first[1] << '\n';
+    std::cout << "Const element: " << fixed[1] << '\n';
+
+    Scores second{1, 2, 3};
+    // + возвращает новое значение; += изменит first.
+    Scores sum = first + second;
+    first += second;
+    std::cout << "Sum total: " << sum.total() << '\n';
+    std::cout << "Updated total: " << first.total() << '\n';
 }

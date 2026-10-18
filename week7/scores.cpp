@@ -1,4 +1,5 @@
 #include "scores.hpp"
+#include <ostream>
 
 #include <stdexcept>
 
@@ -37,5 +38,30 @@ Scores operator+(Scores lhs, const Scores& rhs) {
     // lhs — локальная копия; исходные аргументы не меняются.
     lhs += rhs;
     return lhs;
+}
+
+Scores& Scores::operator*=(int factor) {
+    // Применяем множитель ко всем трём результатам.
+    for (int& value : values_) {
+        value *= factor;
+    }
+    return *this;
+}
+
+Scores operator*(Scores lhs, int factor) {
+    lhs *= factor;
+    return lhs;
+}
+
+Scores operator*(int factor, Scores rhs) {
+    // 2 * scores нельзя реализовать методом класса Scores: слева int.
+    rhs *= factor;
+    return rhs;
+}
+
+std::ostream& operator<<(std::ostream& out, const Scores& scores) {
+    // Возвращаем тот же поток, чтобы работало out << first << second.
+    return out << '[' << scores.values_[0] << ", " << scores.values_[1]
+               << ", " << scores.values_[2] << ']';
 }
 

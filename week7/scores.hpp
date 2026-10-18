@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef> // size_t
+#include <iostream>
 
 class Scores {
 public:
@@ -18,6 +19,11 @@ public:
     // Меняем *this и возвращаем ссылку на тот же объект.
     // В методе есть неявный параметр this (указатель на левый операнд).
     Scores& operator+=(const Scores& rhs);
+    // Общая реализация умножения для a *= n, a * n и n * a.
+    Scores& operator*=(int factor);
+
+    // friend — НЕ метод: свободному operator<< разрешён доступ к private.
+    friend std::ostream& operator<<(std::ostream& out, const Scores& scores);
 
 private:
 
@@ -26,3 +32,8 @@ private:
 
 // Бинарный + создаёт новый объект, используя уже реализованный +=.
 Scores operator+(Scores lhs, const Scores& rhs);
+
+// У свободного operator* нет скрытого this; порядок операндов задают параметры.
+// Две свободные перегрузки поддерживают оба порядка операндов.
+Scores operator*(Scores lhs, int factor);
+Scores operator*(int factor, Scores rhs);

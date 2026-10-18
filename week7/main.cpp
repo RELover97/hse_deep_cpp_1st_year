@@ -57,4 +57,12 @@ int main() {
     first += second;
     std::cout << "Sum total: " << sum.total() << '\n';
     std::cout << "Updated total: " << first.total() << '\n';
+
+    // Умножение поддерживается и при int слева, и при Scores слева.
+    Scores scaled = 2 * second;
+    std::cout << "2 * second: " << scaled.total() << '\n';
+    std::cout << "second * 2: " << (second * 2).total() << '\n';
+
+    // operator<< возвращает ostream&, поэтому допускает цепочки <<.
+    std::cout << "Scores: " << first << " and " << second << '\n';
 }

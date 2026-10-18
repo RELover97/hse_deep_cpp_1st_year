@@ -23,6 +23,12 @@ struct StudentId {
     friend std::ostream& operator<<(std::ostream& out, const StudentId& id) {
         return out << id.group << '-' << id.number;
     }
+
+    // Hidden friend: обычный поиск имени не находит эту функцию.
+    // Неквалифицированный вызов sameGroup(a, b) работает благодаря ADL.
+    friend bool sameGroup(const StudentId& a, const StudentId& b) {
+        return a.group == b.group;
+    }
 };
 
 // Функтор задаёт иной порядок для map, не меняя operator< StudentId.

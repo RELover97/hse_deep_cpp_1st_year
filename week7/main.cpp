@@ -113,4 +113,7 @@ int main() {
     fast_results.emplace(StudentId{"B", 1}, Scores{2, 3, 4});
     std::cout << "Hash lookup A-2: "
               << fast_results.at(StudentId{"A", 2}).total() << '\n';
+
+    // Hidden friend sameGroup находится через ADL по типу аргументов StudentId.
+    std::cout << "Same group: " << sameGroup(anna, boris) << '\n';
 }

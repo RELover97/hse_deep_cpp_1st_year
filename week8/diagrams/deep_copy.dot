@@ -1,0 +1,12 @@
+
+digraph G {
+ graph [rankdir=LR, bgcolor="transparent", pad=0.18, nodesep=0.42, ranksep=0.5, fontname="DejaVu Sans", label="Два независимых набора узлов", labelloc=t, fontsize=17];
+ node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=12, fillcolor="#F1F5F9", color="#64748B", margin="0.17,0.10"];
+ edge [color="#475569", arrowsize=0.7];
+ actual [label="actual\nисходная очередь",fillcolor="#E0F2FE"];
+ a1 [label="Node 101"]; a2 [label="Node 102"];
+ planned [label="planned\nкопия для расчёта",fillcolor="#DCFCE7"];
+ b1 [label="Node 101"]; b2 [label="Node 102"];
+ actual->a1->a2; planned->b1->b2;
+ {rank=same;actual;planned} {rank=same;a1;b1} {rank=same;a2;b2}
+}

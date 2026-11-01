@@ -1,17 +1,22 @@
 #include "ticket_queue.hpp"
 #include <iostream>
 
+
 int main() 
 {
-    TicketQueue line;
-    line.push(101);
-    line.push(102);
-    line.push(103);
+    TicketQueue actual;
+    actual.push(101);
+    actual.push(102);
 
-    std::cout << "Выдано талонов: " << line.size() << '\n';
-    std::cout << "Сейчас вызываем: " << line.front() << '\n';
-    
-    line.pop();
-    // Ещё два узла останутся в очереди. Их освободит деструктор line.
-    std::cout << "Осталось в очереди: " << line.size() << '\n';
+    TicketQueue plan(actual); // глубокое копирование
+    plan.push(103);
+    plan.push(104);
+    std::cout << "plan.front is " << plan.front() << "\n";
+    std::cout << "plan.back is " << plan.back() << "\n";
+    std::cout << "plan.size is " << plan.size() << std::endl;
+
+    plan = actual; // присваивание: старое содержимое plan должно освободиться
+    std::cout << "plan.front is " << plan.front() << "\n";
+    std::cout << "plan.back is " << plan.back() << "\n";
+    std::cout << "plan.size is " << plan.size() << "\n";
 }

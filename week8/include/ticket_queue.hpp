@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <utility>
 
 // Очередь выдаёт номера в том порядке, в котором они поступили (FIFO).
 // Каждый вызов push создаёт узел в динамической памяти.
@@ -25,6 +26,37 @@ public:
         }
     }
 
+    // Глубокое копирование: создаём собственные узлы с теми же номерами, а не копируем указатели
+    TicketQueue(const TicketQueue& other) {
+        // copy & swap idiom:
+        // if creation of copy object thorw exception
+        // then current object is not corrupted
+        TicketQueue temporary;
+        for (Node* node = other.first_; node != nullptr; node = node->next) {
+            temporary.push(node->number);
+        }
+        // must be noexcept
+        swap(temporary); // old nodes in copy are destroyed when exiting operator
+    }
+
+    TicketQueue& operator=(const TicketQueue& other) {
+        // copy & swap idiom:
+        // if creation of copy object thorw exception
+        // then current object is not corrupted
+        TicketQueue copy(other);
+        // must be noexcept
+        swap(copy);  // old nodes in copy are destroyed when exiting operator
+        return *this;
+    }
+
+    void swap(TicketQueue& other) noexcept {
+        // ADL here
+        using std::swap;
+        swap(first_, other.first_);
+        swap(last_, other.last_);
+        swap(size_, other.size_);
+    }
+
     void push(int number) {
         Node* node = new Node{number};
         if (last_ != nullptr) {
@@ -41,6 +73,13 @@ public:
             throw std::logic_error("Очередь пуста");
         }
         return first_->number;
+    }
+
+    int back() const {
+        if (empty()) {
+            throw std::logic_error("Очередь пуста");
+        }
+        return last_->number;
     }
 
     void pop() {

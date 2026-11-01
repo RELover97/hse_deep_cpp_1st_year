@@ -1,45 +1,34 @@
 #pragma once
-
+#include "ticket.hpp"
 #include <cstddef>
 #include <queue>
+#include <memory>
 #include <stdexcept>
+#include <utility>
 
-// Вместо самодельных узлов памятью управляет стандартный контейнер.
+// Талон является самостоятельным объектом; очередь владеет им единолично.
 class TicketQueue {
-    std::queue<int> numbers_;
+    std::queue<std::unique_ptr<Ticket>> tickets_;
 
 public:
-
-    void push(int number) { 
-        numbers_.push(number); 
+    void push(std::unique_ptr<Ticket> ticket) {
+        tickets_.push(std::move(ticket));
     }
 
-    int front() const {
-        if (numbers_.empty()) {
+    std::unique_ptr<Ticket> take_next() {
+        if (tickets_.empty()) {
             throw std::logic_error("Очередь пуста");
         }
-        return numbers_.front();
+        auto ticket = std::move(tickets_.front());
+        tickets_.pop();
+        return ticket;
     }
 
-    int back() const {
-        if (empty()) {
-            throw std::logic_error("Очередь пуста");
-        }
-        return numbers_.back();
-    }
-
-    void pop() {
-        if (numbers_.empty()) {
-            throw std::logic_error("Очередь пуста");
-        }
-        numbers_.pop();
-    }
-
-    bool empty() const {
-        return numbers_.size() == 0; 
+    bool empty() const { 
+        return tickets_.empty(); 
     }
 
     std::size_t size() const { 
-        return numbers_.size(); 
+        return tickets_.size(); 
     }
 };

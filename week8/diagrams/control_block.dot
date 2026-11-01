@@ -1,0 +1,12 @@
+digraph G {
+ graph [rankdir=LR,bgcolor="transparent",pad=0.2, ranksep=0.8,nodesep=0.32,fontname="DejaVu Sans",label="Два shared_ptr — один управляющий блок — один Ticket",labelloc=t,fontsize=15];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,margin="0.2,0.17",color="#64748B",fillcolor="#f1f5f9"];
+ r [label="shared_ptr\nв реестре",fillcolor="#dbeafe"];
+ e [label="shared_ptr\nу сотрудника",fillcolor="#dbeafe"];
+ ctrl [label="Управляющий блок\nсильных владельцев = 2\nсведения об удалении\nучёт слабых ссылок",fillcolor="#fef3c7"];
+ t [label="Ticket №101\nстатус: обслуживается",fillcolor="#dcfce7"];
+ {rank=same;r;e};
+ r -> ctrl [label="владение",fontname="DejaVu Sans",fontsize=10];
+ e -> ctrl [label="владение",fontname="DejaVu Sans",fontsize=10];
+ ctrl -> t [label="управляет временем жизни",fontname="DejaVu Sans",fontsize=10];
+}

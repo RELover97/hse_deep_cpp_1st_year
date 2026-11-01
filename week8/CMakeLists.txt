@@ -12,3 +12,7 @@ target_compile_options(copy_elision_demo PRIVATE -Wall -Wextra -Wpedantic)
 # Отдельный небольшой пример: типы ссылок, категории выражений, копирование и move.
 add_executable(value_categories_demo examples/value_categories.cpp)
 target_compile_options(value_categories_demo PRIVATE -Wall -Wextra -Wpedantic)
+
+# Наглядно показываем изменение числа сильных владельцев.
+add_executable(shared_owners_demo examples/shared_owners.cpp)
+target_compile_options(shared_owners_demo PRIVATE -Wall -Wextra -Wpedantic)

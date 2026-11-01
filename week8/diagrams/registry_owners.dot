@@ -1,0 +1,10 @@
+digraph G {
+ graph [rankdir=LR,bgcolor="transparent",pad=0.2, nodesep=0.25, ranksep=0.7,fontname="DejaVu Sans",label="Два независимых владельца — один талон",labelloc=t,fontsize=15];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,margin="0.17,0.13",color="#64748B",fillcolor="#f1f5f9"];
+ r [label="Реестр\nпроверка статуса",fillcolor="#dbeafe"];
+ e [label="Сотрудник\nобслуживание",fillcolor="#dbeafe"];
+ t [label="Один Ticket №101\nстатус общий",fillcolor="#dcfce7"];
+ {rank=same;r;e};
+ r -> t [label="владеет",fontname="DejaVu Sans",fontsize=10];
+ e -> t [label="владеет",fontname="DejaVu Sans",fontsize=10];
+}

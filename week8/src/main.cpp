@@ -1,21 +1,27 @@
 #include "employee.hpp"
-#include "report.hpp"
 #include "ticket_queue.hpp"
+#include "ticket_registry.hpp"
 #include <iostream>
 #include <memory>
-#include <utility>
 
 int main() 
 {
     TicketQueue line;
-    line.push(std::make_unique<Ticket>(101, "Аня"));
+    TicketRegistry registry;
     Employee employee;
-    employee.accept(line.take_next());
-    employee.print_current();
 
-    DailyReport report = build_report();
-    std::cout << "Отчёт " << report.window_name << ": "
-              << report.served.size() << " талона(ов)\n";
-    DailyReport closed = empty_report();
-    std::cout << closed.window_name << ": " << closed.served.size() << '\n';
+    // У нового талона есть два независимых назначения:
+    // очередь на обслуживание и реестр для проверки статуса.
+    auto ticket = std::make_shared<Ticket>(101, "Аня");
+    registry.add(ticket);
+    line.push(std::move(ticket)); // Переместили локальный shared_ptr в очередь.
+
+    registry.print_status(101);    // Ожидает.
+    employee.accept(line.take_next());
+    registry.print_status(101);    // Обслуживается: объект всё тот же.
+
+    // Сессию посетителя на терминале завершили, но сотрудник продолжает работу.
+    registry.erase(101);
+    employee.print_current();     // Объект ещё существует.
+    employee.finish();           // Последний владелец отпускает объект.
 }

@@ -1,22 +1,34 @@
 #pragma once
+
 #include "ticket.hpp"
 #include <iostream>
 #include <memory>
 #include <utility>
 
 class Employee {
-    std::unique_ptr<Ticket> current_;
+    std::shared_ptr<Ticket> current_;
 
 public:
-    // Сотрудник становится единственным владельцем переданного талона.
-    void accept(std::unique_ptr<Ticket> ticket) {
-        // Именованный параметр ticket — lvalue, даже если в него передали rvalue.
+    void accept(std::shared_ptr<Ticket> ticket) {
         current_ = std::move(ticket);
+        if (current_) {
+            current_->status = TicketStatus::serving;
+        }
+    }
+
+    // Сотрудник отмечает окончание обслуживания и отпускает СВОЮ ссылку.
+    void finish() noexcept {
+        if (current_) {
+            current_->status = TicketStatus::finished;
+        }
+        current_.reset();
     }
 
     void print_current() const {
         if (current_) {
-            std::cout << "Сотрудник обслуживает: " << current_->number << '\n';
+            std::cout << "Сотрудник обслуживает талон " << current_->number << '\n';
+        } else {
+            std::cout << "Сотрудник свободен\n";
         }
     }
 };

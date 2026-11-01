@@ -22,7 +22,6 @@ Trace guaranteed() {
     return Trace{};  // C++17: не требуется создавать промежуточный объект.
 }
 
-// Если оптимизация NRVO не сделана, компилятор может переместить value.
 Trace optional() {
     Trace value;
     return value;  // NRVO разрешено, но не гарантировано.

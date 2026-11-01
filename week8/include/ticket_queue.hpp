@@ -6,16 +6,15 @@
 #include <stdexcept>
 #include <utility>
 
-// Талон является самостоятельным объектом; очередь владеет им единолично.
 class TicketQueue {
-    std::queue<std::unique_ptr<Ticket>> tickets_;
+    std::queue<std::shared_ptr<Ticket>> tickets_;
 
 public:
-    void push(std::unique_ptr<Ticket> ticket) {
+    void push(std::shared_ptr<Ticket> ticket) {
         tickets_.push(std::move(ticket));
     }
 
-    std::unique_ptr<Ticket> take_next() {
+    std::shared_ptr<Ticket> take_next() {
         if (tickets_.empty()) {
             throw std::logic_error("Очередь пуста");
         }

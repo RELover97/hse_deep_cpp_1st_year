@@ -6,15 +6,9 @@ class Desk;
 
 struct DeskTicket {
     int number;
-    std::shared_ptr<Desk> assigned_desk;  // Ошибка модели: сильная обратная ссылка.
-    
-    explicit DeskTicket(int number) 
-        : number(number) 
-        {}
-
-    ~DeskTicket() { 
-        std::cout << "Удалён талон " << number << '\n'; 
-    }
+    std::weak_ptr<Desk> assigned_desk;  // Талон знает окно, но не владеет им.
+    explicit DeskTicket(int number) : number(number) {}
+    ~DeskTicket() { std::cout << "Удалён талон " << number << '\n'; }
 };
 
 class Desk {

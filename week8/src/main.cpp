@@ -16,7 +16,10 @@ int main()
 
     TicketQueue window_c;
     window_c.push(900);
+    std::cout << "У C талонов до передачи: " << window_c.size() << '\n';
+    std::cout << "C обслуживает талон до передачи: " << window_c.front() << '\n';
     // оператор перемещения освобождает старые узлы окна C
     window_c = std::move(window_b);
+    std::cout << "У C талонов: " << window_c.size() << '\n';
     std::cout << "C обслуживает талон: " << window_c.front() << '\n';
 }

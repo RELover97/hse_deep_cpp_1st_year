@@ -1,0 +1,10 @@
+
+digraph G {
+ graph [rankdir=LR,bgcolor="transparent",pad=0.15,ranksep=0.5,nodesep=0.3,fontname="DejaVu Sans",label="В каждый момент — один владелец",labelloc=t,fontsize=17];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=12,fillcolor="#E0F2FE",color="#64748B",margin="0.19,0.11"];
+ a [label="ticket\nunique_ptr<Ticket>"];
+ b [label="Очередь\nunique_ptr<Ticket>"];
+ c [label="Сотрудник\nunique_ptr<Ticket>"];
+ a -> b [label="push(std::move(ticket))",fontname="DejaVu Sans",fontsize=10,color="#0F766E"];
+ b -> c [label="take_next(), accept(...) ",fontname="DejaVu Sans",fontsize=10,color="#0F766E"];
+}

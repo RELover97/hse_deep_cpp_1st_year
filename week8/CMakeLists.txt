@@ -6,3 +6,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(queue_demo src/main.cpp)
 target_include_directories(queue_demo PRIVATE include)
 target_compile_options(queue_demo PRIVATE -Wall -Wextra -Wpedantic)
+
+# Отдельный небольшой пример: типы ссылок, категории выражений, копирование и move.
+add_executable(value_categories_demo examples/value_categories.cpp)
+target_compile_options(value_categories_demo PRIVATE -Wall -Wextra -Wpedantic)

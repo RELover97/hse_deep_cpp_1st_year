@@ -1,0 +1,20 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="transparent", pad=0.22, nodesep=0.28, ranksep=0.52, fontname="DejaVu Sans", fontsize=14];
+  node [shape=box, style="rounded,filled", fillcolor="#F1F5F9", color="#64748B", fontname="DejaVu Sans", fontsize=12, margin="0.16,0.12"];
+  edge [color="#475569", arrowsize=0.65];
+  subgraph cluster_before {
+    label="До передачи"; color="#CBD5E1"; style="rounded"; labelloc="t";
+    old [label="Окно №1\nвладеет очередью",fillcolor="#DBEAFE"];
+    tickets [label="Узлы памяти\n101 → 102 → 103",fillcolor="#DCFCE7"];
+    new [label="Окно №2\nочередь пуста",fillcolor="#F8FAFC"];
+    old -> tickets [label="владеет"];
+  }
+  subgraph cluster_after {
+    label="После передачи"; color="#CBD5E1"; style="rounded"; labelloc="t";
+    old2 [label="Окно №1\nочередь пуста",fillcolor="#F8FAFC"];
+    new2 [label="Окно №2\nвладеет очередью",fillcolor="#DBEAFE"];
+    tickets2 [label="Те же узлы памяти\n101 → 102 → 103",fillcolor="#DCFCE7"];
+    new2 -> tickets2 [label="владеет"];
+  }
+  tickets -> new2 [style=invis, minlen=2];
+}

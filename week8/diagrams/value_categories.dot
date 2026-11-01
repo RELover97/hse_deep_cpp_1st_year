@@ -1,0 +1,15 @@
+
+digraph G {
+ graph [rankdir=TB,bgcolor="transparent",pad=0.2,ranksep=0.35,nodesep=0.25,fontname="DejaVu Sans",fontsize=14];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=12,fillcolor="#F1F5F9",color="#64748B",margin="0.16,0.1"];
+ edge [color="#64748B",arrowsize=0.65];
+ expr [label="Выражение C++", fillcolor="#E2E8F0"];
+ lv [label="lvalue\nname",fillcolor="#DBEAFE"];
+ pv [label="prvalue\n42, T{}",fillcolor="#DCFCE7"];
+ xv [label="xvalue\nstd::move(name)",fillcolor="#FEF3C7"];
+ expr -> {lv pv xv};
+ gl [label="glvalue = lvalue + xvalue",style="rounded,dashed",fillcolor="white"];
+ rv [label="rvalue = prvalue + xvalue",style="rounded,dashed",fillcolor="white"];
+ {rank=same;lv;pv;xv}; {rank=same;gl;rv};
+ lv -> gl [style=dotted,dir=none]; xv -> gl [style=dotted,dir=none]; pv -> rv [style=dotted,dir=none]; xv -> rv [style=dotted,dir=none];
+}

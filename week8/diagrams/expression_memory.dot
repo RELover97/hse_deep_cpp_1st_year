@@ -1,0 +1,12 @@
+digraph G {
+ graph [rankdir=LR,bgcolor="transparent",pad=0.2, nodesep=0.28, ranksep=0.4,fontsize=13,fontname="DejaVu Sans",label="Разные выражения могут обращаться к одному объекту",labelloc=t];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,margin="0.17,0.13",color="#64748B",fillcolor="#f1f5f9"];
+ object [label="Объект a типа int\nв области хранения\nзначение 10",fillcolor="#dcfce7"];
+ l [label="a\nlvalue",fillcolor="#dbeafe"];
+ pr [label="a + 1\nprvalue: 11",fillcolor="#fef3c7"];
+ xv [label="std::move(a)\nxvalue",fillcolor="#dbeafe"];
+ {rank=same;l;pr;xv};
+ l -> object [label="обозначает",fontsize=10,fontname="DejaVu Sans"];
+ xv -> object [label="ТОТ ЖЕ объект",fontsize=10,fontname="DejaVu Sans"];
+ pr -> object [style=dashed,arrowhead=none,label="считывает a\nдля вычисления",fontsize=10,fontname="DejaVu Sans"];
+}

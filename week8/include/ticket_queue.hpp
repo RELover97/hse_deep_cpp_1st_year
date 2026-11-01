@@ -49,6 +49,23 @@ public:
         return *this;
     }
 
+    // Вместо создания новых узлов забираем готовую цепочку.
+    TicketQueue(TicketQueue&& other) noexcept
+        : first_(other.first_), last_(other.last_), size_(other.size_) {
+        other.first_ = nullptr;
+        other.last_ = nullptr;
+        other.size_ = 0;
+    }
+
+    TicketQueue& operator=(TicketQueue&& other) noexcept {
+        if (this != &other) {
+            TicketQueue empty;
+            swap(empty);  // старые узлы будут удалены вместе с empty
+            swap(other);  // забираем узлы из other; там остаётся пустота.
+        }
+        return *this;
+    }
+
     void swap(TicketQueue& other) noexcept {
         // ADL here
         using std::swap;

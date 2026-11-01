@@ -1,0 +1,12 @@
+
+digraph G {
+ graph [rankdir=LR,bgcolor="transparent",pad=0.22,ranksep=0.8,nodesep=0.25,fontname="DejaVu Sans",label="Уведомления не удерживают закрытые приложения",labelloc=t,fontsize=16];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=12,fillcolor="#F1F5F9",color="#64748B",margin="0.22,0.16"];
+ src [label="Вызов талона\n№101",fillcolor="#DBEAFE"];
+ notify [label="Notifications\nсписок weak_ptr",fillcolor="#FEF3C7"];
+ phone1 [label="Телефон Ани\non_called(...) ",fillcolor="#DCFCE7"];
+ phone2 [label="Телефон Бориса\non_called(...) ",fillcolor="#DCFCE7"];
+ src -> notify [label="announce",fontname="DejaVu Sans",fontsize=10];
+ notify -> phone1 [label="lock() → вызов",fontname="DejaVu Sans",fontsize=10,color="#15803D",style=dashed];
+ notify -> phone2 [label="lock() → вызов",fontname="DejaVu Sans",fontsize=10,color="#15803D",style=dashed];
+}

@@ -9,6 +9,9 @@ target_compile_options(queue_demo PRIVATE -Wall -Wextra -Wpedantic)
 add_executable(copy_elision_demo examples/copy_elision.cpp)
 target_compile_options(copy_elision_demo PRIVATE -Wall -Wextra -Wpedantic)
 
+add_executable(ownership_cycle_demo examples/ownership_cycle.cpp)
+target_include_directories(ownership_cycle_demo PRIVATE include)
+
 # Отдельный небольшой пример: типы ссылок, категории выражений, копирование и move.
 add_executable(value_categories_demo examples/value_categories.cpp)
 target_compile_options(value_categories_demo PRIVATE -Wall -Wextra -Wpedantic)

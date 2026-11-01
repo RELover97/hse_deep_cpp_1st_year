@@ -1,0 +1,9 @@
+
+digraph G {
+ graph [bgcolor="transparent",pad=0.2,ranksep=0.5,nodesep=1,fontname="DejaVu Sans",label="После выхода из функции оба объекта всё ещё владеют друг другом",labelloc=t,fontsize=16];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=13,fillcolor="#FEE2E2",color="#B91C1C",margin="0.25,0.20"];
+ desk [label="Desk\nокно"];
+ ticket [label="DeskTicket\nталон"];
+ desk -> ticket [label="shared_ptr",fontname="DejaVu Sans",fontsize=11,color="#B91C1C"];
+ ticket -> desk [label="shared_ptr",fontname="DejaVu Sans",fontsize=11,color="#B91C1C"];
+}

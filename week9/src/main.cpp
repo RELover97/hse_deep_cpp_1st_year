@@ -2,29 +2,7 @@
 #include <string>
 #include <vector>
 
-// Проверяем, приглашён ли человек: ищем имя среди имён
-bool isInvited(const std::vector<std::string>& guests,
-               const std::string& name) 
-{
-    for (const std::string& guest : guests) {
-        if (guest == name) {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-// Проверяем, занят ли номер места: алгоритм почти такой же
-bool isSeatTaken(const std::vector<int>& seats, int seat) 
-{
-    for (int occupied : seats) {
-        if (occupied == seat) {
-            return true;
-        }
-    }
-    return false;
-}
+#include "algorithms.hpp"
 
 
 int main() 
@@ -32,9 +10,26 @@ int main()
     const std::vector<std::string> guests = {"Аня", "Илья", "Маша"};
     const std::vector<int> occupiedSeats = {2, 5};
 
-    std::cout << "Аня приглашена: " << isInvited(guests, "Аня") << '\n';
-    std::cout << "Место 5 занято: " << isSeatTaken(occupiedSeats, 5) << '\n';
-    std::cout << "Место 3 занято: " << isSeatTaken(occupiedSeats, 3) << '\n';
+    // Из одного описания contains компилятор получает две функции
+    std::cout << "Аня приглашена: "
+              << contains(guests, std::string("Аня")) << '\n';
+    std::cout << "Место 5 занято: " << contains(occupiedSeats, 5) << '\n';
+
+    // Небольшие самостоятельные примеры классических шаблонов
+    const int latestSeat = maximum(2, 5);
+    int firstSeat = 2;
+    int secondSeat = 5;
+
+    swapValues(firstSeat, secondSeat);
+
+    std::cout << "Наибольший номер: " << latestSeat << '\n';
+    std::cout << "После обмена: " << firstSeat << ", " << secondSeat << '\n';
+
+    std::string a = "abc";
+    std::string b = "def";
+    std::cout << "Before swap: a = " << a << ", b = " << b << std::endl;
+    swapValues(a, b);
+    std::cout << "After swap: a = " << a << ", b = " << b << std::endl;
 
     return 0;
 }

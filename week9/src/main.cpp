@@ -1,35 +1,24 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
-#include "algorithms.hpp"
-
+#include "seat_maps.hpp"
 
 int main() 
 {
-    const std::vector<std::string> guests = {"Аня", "Илья", "Маша"};
-    const std::vector<int> occupiedSeats = {2, 5};
+    SeatsByGuest seats;
 
-    // Из одного описания contains компилятор получает две функции
-    std::cout << "Аня приглашена: "
-              << contains(guests, std::string("Аня")) << '\n';
-    std::cout << "Место 5 занято: " << contains(occupiedSeats, 5) << '\n';
+    seats.add("Аня", 2);
+    seats.add("Илья", 5);
+    seats.add("Маша", 1);
 
-    // Небольшие самостоятельные примеры классических шаблонов
-    const int latestSeat = maximum(2, 5);
-    int firstSeat = 2;
-    int secondSeat = 5;
+    int seat = 0;
+    if (seats.get("Илья", seat)) {
+        std::cout << "Илья сидит на месте " << seat << '\n';
+    }
 
-    swapValues(firstSeat, secondSeat);
-
-    std::cout << "Наибольший номер: " << latestSeat << '\n';
-    std::cout << "После обмена: " << firstSeat << ", " << secondSeat << '\n';
-
-    std::string a = "abc";
-    std::string b = "def";
-    std::cout << "Before swap: a = " << a << ", b = " << b << std::endl;
-    swapValues(a, b);
-    std::cout << "After swap: a = " << a << ", b = " << b << std::endl;
+    if (!seats.get("Оля", seat)) {
+        std::cout << "Оля пока не рассажена\n";
+    }
 
     return 0;
 }

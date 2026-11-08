@@ -1,31 +1,26 @@
 #include <iostream>
 #include <string>
 
-#include "seat_maps.hpp"
+#include "index.hpp"
 
 int main() 
 {
-    SeatsByGuest seatsByGuest;
-    GuestsBySeat guestsBySeat;
+    // Один шаблон класса; два разных набора аргументов типа
+    Index<std::string, int> seatsByGuest;
+    Index<int, std::string> guestsBySeat;
 
-    // Проверяем обе стороны, прежде чем добавлять сведения в обе таблицы
-    const std::string guest = "Аня";
-    const int seat = 2;
-    int existingSeat = 0;
-    std::string existingGuest;
-    if (!seatsByGuest.get(guest, existingSeat) &&
-        !guestsBySeat.get(seat, existingGuest)) {
-        seatsByGuest.add(guest, seat);
-        guestsBySeat.add(seat, guest);
-    }
+    seatsByGuest.add("Аня", 2);
+    guestsBySeat.add(2, "Аня");
+    seatsByGuest.add("Илья", 5);
+    guestsBySeat.add(5, "Илья");
 
-    int foundSeat = 0;
-    std::string foundGuest;
-    if (seatsByGuest.get("Аня", foundSeat)) {
-        std::cout << "Аня: место " << foundSeat << '\n';
+    int seat = 0;
+    std::string guest;
+    if (seatsByGuest.get("Аня", seat)) {
+        std::cout << "Аня: место " << seat << '\n';
     }
-    if (guestsBySeat.get(2, foundGuest)) {
-        std::cout << "Место 2: " << foundGuest << '\n';
+    if (guestsBySeat.get(5, guest)) {
+        std::cout << "Место 5: " << guest << '\n';
     }
 
     return 0;

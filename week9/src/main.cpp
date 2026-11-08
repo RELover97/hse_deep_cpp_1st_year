@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "index.hpp"
 #include "printer.hpp"
@@ -17,13 +18,17 @@ int main() {
     guestsBySeat.add(5, "Илья");
     confirmations.add("Илья", false);
 
-    int seat = 0;
+    const std::vector<std::string> names = {"Аня", "Илья"};
+    const std::vector<int> occupiedSeats = {2, 5};
+    std::cout << "Гости: ";
+    Printer<std::vector<std::string>>::print(std::cout, names);
+    std::cout << "\nЗанятые места: ";
+    Printer<std::vector<int>>::print(std::cout, occupiedSeats);
+    std::cout << '\n';
+
     bool confirmed = false;
-    if (seatsByGuest.get("Аня", seat) &&
-        confirmations.get("Аня", confirmed)) {
-        std::cout << "Аня: место ";
-        Printer<int>::print(std::cout, seat);
-        std::cout << ", подтвердил(а): ";
+    if (confirmations.get("Аня", confirmed)) {
+        std::cout << "Аня подтвердила: ";
         Printer<bool>::print(std::cout, confirmed);
         std::cout << '\n';
     }

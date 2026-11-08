@@ -17,6 +17,14 @@ $(APP): src/main.cpp src/index.cpp $(HEADERS) Makefile
 run: $(APP)
 	./$(APP)
 
+build/tests: tests/test_main.cpp $(HEADERS) Makefile
+	@mkdir -p build
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) tests/test_main.cpp -o $@
+
+test: $(APP) build/tests
+	@./$(APP) > /dev/null
+	./build/tests
+
 build/one.o: experiments/one.cpp $(HEADERS) Makefile
 	@mkdir -p build
 	$(CXX) $(CPPFLAGS) $(EXPERIMENT_FLAGS) -c $< -o $@

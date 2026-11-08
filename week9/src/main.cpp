@@ -6,9 +6,11 @@
 #include "printer.hpp"
 
 int main() {
-    Index<std::string, int> seatsByGuest;
-    Index<int, std::string> guestsBySeat;
-    Index<std::string, bool> confirmations;
+    // Число мест известно до запуска программы.
+    constexpr std::size_t tableCapacity = 6;
+    Index<std::string, int, tableCapacity> seatsByGuest;
+    Index<int, std::string, tableCapacity> guestsBySeat;
+    Index<std::string, bool, tableCapacity> confirmations;
 
     seatsByGuest.add("Аня", 2);
     guestsBySeat.add(2, "Аня");

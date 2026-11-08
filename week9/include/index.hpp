@@ -10,9 +10,10 @@ struct Entry {
     Value value;
 };
 
-// Универсальная таблица соответствий с линейным поиском
-template <typename Key, typename Value>
+// Универсальная таблица соответствий с линейным поиском.
+template <typename Key, typename Value, std::size_t Capacity>
 class Index {
+    static_assert(Capacity > 0, "Index capacity must be positive");
 public:
     // Новую запись добавляем только при отсутствии такого ключа
     bool add(const Key& key, const Value& value) {
@@ -20,6 +21,9 @@ public:
             if (entry.key == key) {
                 return false;
             }
+        }
+        if (entries_.size() >= Capacity) {
+            return false;
         }
         entries_.push_back({key, value});
         return true;

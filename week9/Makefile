@@ -10,9 +10,9 @@ HEADERS := $(wildcard include/*.hpp)
 
 all: $(APP)
 
-$(APP): src/main.cpp $(HEADERS) Makefile
+$(APP): src/main.cpp src/index.cpp $(HEADERS) Makefile
 	@mkdir -p build
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) src/main.cpp -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) src/main.cpp src/index.cpp -o $@
 
 run: $(APP)
 	./$(APP)
